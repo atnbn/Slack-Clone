@@ -1,0 +1,15 @@
+.user-details {
+    padding: 50px 100px 50px 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    img {
+        width: 100px;
+    }
+}

@@ -1,0 +1,13 @@
+<div class="edit-dialog">
+    <div class="edit-cont">
+        <h1 mat-dialog-title>Enter Channel Name</h1>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Enter Channel Name</mat-label>
+            <input matInput placeholder="Channel Name" [value]="value" [(ngModel)]="value">
+        </mat-form-field>
+        <div mat-dialog-actions>
+            <button mat-button [mat-dialog-close]="true">Cancel</button>
+            <button mat-button [mat-dialog-close]="" (click)="update()" cdkFocusInitial>Save</button>
+        </div>
+    </div>
+</div>

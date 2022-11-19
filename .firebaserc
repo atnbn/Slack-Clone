@@ -1,0 +1,23 @@
+{
+  "projects": {
+    "default": "slack-clone-c2cbe",
+    "Slack": "slack-clone-c2cbe"
+  },
+  "targets": {
+    "slack-clone-94f23": {
+      "hosting": {
+        "Slack-Clone": [
+          "slack-clone-94f23"
+        ]
+      }
+    },
+    "slack-clone-c2cbe": {
+      "hosting": {
+        "Slack-Clone": [
+          "slack-clone-c2cbe"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

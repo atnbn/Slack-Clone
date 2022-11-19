@@ -1,0 +1,113 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="side-nav" mode="side" opened="true">
+    <div class="channels m-left-20">
+      <div class="chat">
+        <!-- <div class="chat-user">
+                    <div *ngIf="authService.currentUser$ |async as user; ">
+                        <div class="user-image"><img [src]="user.photoURL ?? 'assets/profile-img/profile-1.png'"></div>
+                        <span class="user-name-sidenav"> {{user.displayName}}</span>
+                        <span> {{user.email}}</span>
+                    </div>
+                </div> -->
+      </div>
+      <div class="channels-main">
+        <!-- <div class="channels"> -->
+        <!-- <span *ngFor="let channel of allChannels"
+                ># {{ channel.channelName }}</span
+                > -->
+        <div class="channel-container">
+          <h3 (click)="toggleChannel()">Channels</h3>
+          <div
+            class="link-container"
+            *ngFor="let channel of allChannels"
+            [routerLink]="['/chat/' + channel.customIdName]"
+          >
+            <img
+              class="hashtag"
+              src="assets/img/sidebar/icons8-hashtag-50.png"
+            />
+
+            <a class="link-to-channel">
+              {{ channel.channelName }}
+            </a>
+          </div>
+
+          <div class="link-container" (click)="openDialog()">
+            <img
+              class="hashtag"
+              src="assets/img/sidebar/icons8-plus-math-24.png"
+            />
+            <span class="link-to-channel"> Add Channels </span>
+          </div>
+        </div>
+
+        <!-- Dm Container -->
+        <div class="dm-container">
+          <h3>Direct Messages</h3>
+          <div
+            class="link-container"
+            *ngFor="let dm of DM_channels"
+            [routerLink]="['/chat/' + dm.dmID]"
+          >
+            <!-- Img for user  -->
+            <img class="hashtag" src="assets/img/" />
+
+            <a class="link-to-channel">
+              <!-- {{ dm.name.split(",", 1) }} -->
+            </a>
+          </div>
+
+          <div class="link-container" (click)="openDialog()">
+            <img
+              class="hashtag"
+              src="assets/img/sidebar/icons8-plus-math-24.png"
+            />
+            <span class="link-to-channel"> Add Member </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 
+    Dm Section
+    <div class="direct-msg">
+      <div class="cereat-channels coloum">
+        <button
+          (click)="OpenAddDmChannel()"
+          class="add-btn"
+          mat-fab
+          color="primary"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <span (click)="openDialog()" class="m-left-20">Direct Message</span>
+      </div>
+      <div class="channels-main m-left-20">
+        <mat-selection-list #directMSG [multiple]="false">
+          <mat-list-option
+            (click)="toogelSideNav()"
+            class="channel-list"
+            [value]="directMSG"
+          >
+            <a class="link-to-channel">
+              {{ Directchannel.name.split(",", 1) }}
+            </a>
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </div> -->
+  </mat-drawer>
+  <div class="router-outlet">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
+
+<!-- <mat-selection-list #channel [multiple]="false">
+          <mat-list-option
+            (click)="toogelSideNav()"
+            class="channel-list"
+            *ngFor="let channel of allChannels"
+            [routerLink]="['/chat/' + channel.customIdName]"
+            [value]="channel"  >
+            <a class="link-to-channel"> # {{ channel.channelName }} </a>
+          </mat-list-option>
+        </mat-selection-list> -->

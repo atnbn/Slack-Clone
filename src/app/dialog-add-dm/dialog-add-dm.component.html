@@ -1,0 +1,28 @@
+<div class="dialog">
+    <form class="d-flex mat-container">
+        <h1 mat-dialog-title>Add Direct Message</h1>
+        <div mat-dialog-content class="dialog-content">
+            <!-- <p>What would you like to call your new Channel?</p>
+            <mat-form-field appearance="fill">
+                <mat-label>Channel name</mat-label>
+                <input matInput [(ngModel)]="directMessage.name" [ngModelOptions]="{standalone: true}">
+            </mat-form-field> -->
+
+            <p>Who would you like to create a Chat with ?</p>
+            <mat-form-field appearance="fill">
+                <mat-label>Users</mat-label>
+                <mat-select multiple [formControl]="selectedUsers">
+                    <!-- <mat-select-trigger>
+                        name
+                    </mat-select-trigger> -->
+                    <mat-option *ngFor="let user of accountUsers" [value]="user">{{ user.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button [mat-dialog-close]="true">Cancel</button>
+            <button mat-button (click)="createDMChannel()" cdkFocusInitial>OK</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,479 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.d-flex-center-colm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+::-webkit-scrollbar {
+    width: 15px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #202226;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+    height: 30px;
+}
+
+.m-left-20 {
+    // ml-20 maybe ?
+    // margin-left: 20px !important;
+}
+
+.header-login-link {
+    cursor: pointer;
+    margin-left: 18px;
+}
+
+.m-right-20 {
+    // mr-20 maybe ?
+    margin-right: 20px;
+}
+
+.mat-dialog-container {
+    padding: 0 !important;
+}
+
+mat-drawer-content {
+    overflow-x: hidden !important;
+}
+.p {
+    padding: 0px;
+}
+.p-left-20 {
+    // pl-20 maybe ?
+    padding-left: 20px;
+}
+
+.p-right-20 {
+    padding-right: 20px;
+}
+
+.m-left-350 {
+    margin-left: 350px;
+}
+
+.left-side-logo {
+    padding-left: 45px;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    img {
+        width: 14%;
+        background: white;
+        padding: 5px;
+        border-radius: 10px;
+        box-shadow: 0 0px 6px 0px;
+    }
+}
+
+.p-absolute {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+}
+
+.show-chat {
+    overflow-x: hidden;
+    height: auto;
+    max-height: 75%;
+}
+
+.p-top-35 {
+    padding-top: 35px;
+}
+
+.red-color {
+    color: red !important;
+    background: #ff000033 !important;
+}
+
+.p-relative {
+    position: relative;
+}
+
+.send-btn {
+    width: 164px;
+    height: 70px;
+    border-radius: 5px 5px 5px 5px;
+    transition: opacity 1s ease-in-out;
+    margin-left: 20px;
+    &:hover {
+        mat-icon {
+            transition: opacity 255ms ease-in-out;
+            opacity: 0;
+        }
+    }
+    &::before {
+        content: "Send";
+        visibility: hidden;
+        position: absolute;
+        transition: all 255ms ease-in-out;
+        text-align: center;
+        opacity: 0;
+        top: 0;
+        bottom: 0;
+        margin-right: 5px;
+        font-size: 16px;
+        top: 0;
+        bottom: 0;
+        margin-right: 5px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        mat-icon {
+            opacity: 1;
+        }
+    }
+    &:hover::before {
+        visibility: visible;
+        opacity: 1;
+        mat-icon {
+            opacity: 0;
+        }
+    }
+}
+
+.msg-image {
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.file-upload {
+    input {
+        cursor: pointer;
+    }
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 40px !important;
+    top: unset !important;
+}
+
+.msg-box {
+    margin: 0px 3px 12px 0px;
+    // background-color: white;
+    border-radius: 5px;
+    position: relative;
+    div {
+        // padding: 5px 10px 10px 20px;
+    }
+}
+
+.right-down-corner {
+    position: relative;
+    transition: all 225ms ease-in-out;
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
+    }
+}
+
+.chat-user {
+    display: flex;
+    img {
+        height: 50px;
+    }
+}
+
+.chat-text {
+    display: flex;
+    flex-direction: column;
+    // margin-left: 8px;
+    height: 80vh;
+}
+
+.user-name {
+    font-weight: bold;
+    color: #f8f8fa;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.chat-messages {
+    color: #f8f8fa;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-time {
+    margin-left: 8px;
+    font-weight: normal;
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.user-img {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+pre {
+    background: #0000004d;
+    width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.edit-option {
+    width: fit-content;
+    cursor: pointer;
+    position: absolute !important;
+    right: -2px !important;
+    top: 0;
+    padding: 0 !important;
+}
+
+.thread {
+    a {
+        background: #232946;
+        color: white;
+        padding: 5px;
+        text-decoration: none;
+    }
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.chat-messages {
+    width: 90%;
+}
+
+.image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-overlay {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: -50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    transition: all 225ms ease-in-out;
+    button {
+        position: absolute;
+        right: 20px;
+        cursor: pointer;
+    }
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+}
+
+.chat-text {
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.log-out-btn {
+    color: white;
+    background-color: #4d66df96;
+    width: fit-content !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    transition: all 115ms ease-in-out;
+    &:hover {
+        background-color: #d4d8f0 !important;
+        color: #232946;
+    }
+}
+
+.router-outlet {
+    padding-top: 65px;
+    height: calc(100% - 65px);
+    background-color: hsl(238deg 5% 7%);
+}
+
+.preview {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0 0 1 / 74%);
+    img {
+        width: auto;
+        max-width: 95%;
+        max-height: 90%;
+        height: auto;
+    }
+    button {
+        position: absolute;
+        top: 8%;
+        right: 0%;
+    }
+    mat-icon {
+        position: absolute;
+        top: 8%;
+        right: 60px;
+        color: white !important;
+    }
+}
+
+.tox .tox-toolbar--scrolling {
+    height: 37px;
+    overflow: auto;
+    flex-wrap: wrap !important;
+}
+
+.danger {
+    color: red !important;
+    background: #ff000033 !important;
+}
+
+@media (max-width: 1000px) {
+    mat-drawer-content {
+        overflow-x: hidden !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .image-overlay {
+        right: unset;
+    }
+}
+
+@media (max-height: 1100px) {
+    /*  .show-chat {
+        height: 58vh;
+    } */
+    .msg-box {
+        // margin: 10px 10px 10px 10px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .channel-name {
+        // padding-top: 20px;
+        padding-bottom: unset;
+        h1 {
+            font-size: 18px;
+        }
+    }
+    .send-btn {
+        height: 50px;
+        width: 100px;
+        padding: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .bottom {
+        flex-direction: column;
+    }
+    .text-con {
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: center;
+        width: 50%;
+    }
+    /*     .thread {
+        font-size: 10px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    } */
+    /*    .show-chat {
+        height: 67vh;
+    } */
+}
+
+@media (max-width: 700px) {
+    .text-con {
+        margin-top: 5px;
+    }
+    .editor-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .editor {
+        width: 95%;
+        height: 40%;
+    }
+    .send-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+    }
+    .file-upload {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+    }
+    .upload-button {
+        content: "";
+    }
+    mat-button-wrapper {
+        content: "";
+    }
+    .show-chat {
+        // margin-left: -16px !important;
+        margin: 0;
+    }
+}
+
+@media (max-height: 700px) {
+    .bottom {
+        width: 100%;
+        height: 182px;
+        flex-direction: column-reverse;
+    }
+    /*   .show-chat {
+        height: 50vh;
+    } */
+    .channel-name {
+        padding-top: 15px;
+        padding-bottom: 1px;
+    }
+}
+
+:root {
+    --font-white: #f8f8fa;
+}

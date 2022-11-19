@@ -1,0 +1,22 @@
+<div class="dialog">
+    <form class="d-flex mat-container">
+        <h1 mat-dialog-title>Add Channel</h1>
+        <div mat-dialog-content class="dialog-content">
+            <p>What would you like to call your new Channel?</p>
+            <mat-form-field appearance="fill">
+                <mat-label>Channel name</mat-label>
+                <input matInput [(ngModel)]="myChannel.channelName" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <!-- <mat-form-field class="m-left-20" appearance="fill">
+                <mat-label>Channel description</mat-label>
+                <input matInput [(ngModel)]="channelDescripton">
+            </mat-form-field> -->
+
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button [mat-dialog-close]="true">Cancel</button>
+            <button mat-button (click)="createChannel()" [mat-dialog-close]="" cdkFocusInitial>OK</button>
+        </div>
+    </form>
+</div>

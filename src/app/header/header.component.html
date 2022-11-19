@@ -1,0 +1,52 @@
+<header>
+  <mat-toolbar class="box" color="primary">
+    <div class="left-side">
+      <mat-icon class="close-btn" (click)="closeMenu()">menu</mat-icon>
+
+      <span>Slack-Clone</span>
+    </div>
+    <ng-container
+      *ngIf="authService.currentUser$ | async as user; else loginButton"
+    >
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <div class="user">
+          <img
+            class="user-img"
+            [src]="user?.photoURL ?? 'assets/profile-img/profile-1.png'"
+          />
+        </div>
+        <!-- <mat-icon>expand_more</mat-icon> -->
+      </button>
+    </ng-container>
+
+    <ng-template #loginButton>
+      <button mat-button routerLink="login">
+        Login
+        <mat-icon>login</mat-icon>
+      </button>
+    </ng-template>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="home">
+        <mat-icon>home</mat-icon>
+        Home
+      </button>
+      <button mat-menu-item routerLink="profile">
+        <mat-icon>person</mat-icon>
+
+        Profile
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+
+        Logout
+      </button>
+
+      <button class="danger" mat-menu-item (click)="deleteAccount()">
+        <mat-icon>delete</mat-icon>
+
+        Delete account
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</header>

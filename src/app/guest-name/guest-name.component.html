@@ -1,0 +1,18 @@
+<div class="guestName-Container">
+
+    <h1 mat-dialog-title>Login as guest</h1>
+    <div mat-dialog-content>Please enter your name to Login as Guest. <br>
+        <p>The Guest account will be automatically deleted as soon as you log out.</p>
+    </div>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Your Name</mat-label>
+        <input matInput placeholder="Name" #guestName [(ngModel)]="GusetName" required="true">
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+        <button mat-button class="button-green" (click)="Update()">Submit</button>
+        <button mat-button [mat-dialog-close]="true">Close</button>
+    </div>
+
+</div>

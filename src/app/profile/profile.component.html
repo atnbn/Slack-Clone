@@ -1,0 +1,14 @@
+<div class="block">
+
+
+    <div class="form-container mat-elevation-z5 text-center" *ngIf="!!user">
+        <div class="content">
+            <h1> {{user?.displayName}}</h1>
+            <img [src]="user?.photoURL ?? 'assets/profile-img/profile-1.png'">
+            <button mat-mini-fab (click)="inputField.click()">
+            <mat-icon class="edit-button">edit</mat-icon>
+        </button>
+        </div>
+    </div>
+    <input type="file" hidden #inputField (change)="uploadImage($event)">
+</div>

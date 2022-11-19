@@ -1,0 +1,32 @@
+.box {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.user-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user {
+    display: flex;
+    justify-content: end;
+    text-align: center;
+    align-items: end;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    mat-icon {
+        margin: 10px;
+        cursor: pointer;
+    }
+}
+.mat-toolbar {
+    height: 44px;
+    background: #242323;
+}

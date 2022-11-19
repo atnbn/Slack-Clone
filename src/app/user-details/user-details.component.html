@@ -1,0 +1,14 @@
+<div class="user-details">
+    <div class="header">
+        <img mat-dialog-title [src]="userDetailsArray?.photoURL || 'assets/profile-img/profile-1.png'" alt="">
+        <h1 mat-dialog-title>{{userDetailsArray?.name || 'Guest'}}</h1>
+    </div>
+    <div mat-dialog-content>
+    </div>
+    <div mat-dialog-content>
+        {{userDetailsArray?.eamil || 'This user was a guest'}}
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Close</button>
+    </div>
+</div>

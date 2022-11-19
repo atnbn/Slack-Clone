@@ -1,0 +1,97 @@
+<!-- <header>
+    <mat-toolbar class="box" color="primary">
+        <div class="left-side left-side-logo">
+            <img src="./assets/favicon.png" alt="">
+            <span routerLink="/login" class="header-login-link">Slack-Clone</span>
+        </div>
+
+
+        <ng-template>
+            <button mat-button routerLink="login">Login
+                <mat-icon>login</mat-icon>
+            </button>
+        </ng-template>
+    </mat-toolbar>
+
+</header> -->
+<div class="body">
+  <div class="upper-section">
+    <img src="../assets/img/log-in/LogoMakr-1N4SWq.png" alt="" />
+  </div>
+  <div class="message">
+    <h1>Please fill up the required fields</h1>
+  </div>
+  <div class="block">
+    <div class="form-container" mat-elevation-z5>
+      <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" />
+          <mat-error *ngIf="email?.errors?.['required']">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" />
+          <mat-error *ngIf="email?.errors?.['required']">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="email?.errors?.['email']">
+            Please enter a correct email format
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Password"
+            formControlName="password"
+            type="password"
+          />
+          <mat-error *ngIf="password?.errors?.['required']">
+            Password required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+            type="password"
+          />
+          <mat-error *ngIf="password?.errors?.['required']">
+            Confirm Password required
+          </mat-error>
+        </mat-form-field>
+        <mat-error *ngI="signUpForm.erros?.['passwordsDontMatch']">
+          Passwords should match
+        </mat-error>
+        <div class="center margin-top">
+          <button mat-raised-button color="primary" type="submit">
+            Sign Up
+          </button>
+          <p>
+            You already have an account ? <a routerLink="/login"> Click here</a>
+          </p>
+        </div>
+      </form>
+    </div>
+    <footer>
+      <div class="left">
+        <a routerLink="imprint" routerLinkActive="router-link-active"
+          >Imprint</a
+        >
+      </div>
+      <div class="right">
+        <a routerLink="legal-notice" routerLinkActive="router-link-active"
+          >Legal Notice</a
+        >
+        <!-- <a
+          href="https://github.com/navjotsingh96/Slack-Clone"
+          target="_blank"
+          routerLinkActive="router-link-active"
+        >
+          <img src="../assets/github-fill.png" alt=""
+        /></a> -->
+      </div>
+    </footer>
+  </div>
+</div>

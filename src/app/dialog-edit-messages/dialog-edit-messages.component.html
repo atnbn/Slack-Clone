@@ -1,0 +1,23 @@
+<div class="edit-dialog">
+    <div class="edit-cont">
+        <h1 mat-dialog-title>Enter your message</h1>
+        <div mat-dialog-content>
+
+            <editor apiKey="zg1ewlatwilxkc2zsdaly0nlwvqfnz7jf5t33ff9z170o26g" [init]="
+            { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
+            height: 150,
+            width: 500,
+            branding: false,
+            menubar: false,
+            statusbar: true,
+            elementpath: false,
+            browser_spellcheck: true
+           }" [(ngModel)]="value">
+            </editor>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button [mat-dialog-close]="true">Cancel</button>
+            <button mat-button [mat-dialog-close]="" (click)="update()" cdkFocusInitial>Send</button>
+        </div>
+    </div>
+</div>

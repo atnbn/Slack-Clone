@@ -1,0 +1,23 @@
+.bg {
+    height: 100vh;
+    // height: 100%;
+}
+
+.header-login {
+    position: fixed !important;
+}
+.mat-drawer-content {
+    overflow-y: hidden !important;
+}
+.ng-star-inserted {
+    overflow: hidden;
+}
+@media (max-width: 1000px) {
+    .bg {
+        height: 100vh;
+        // height: 100%;
+    }
+    .mat-drawer-content {
+        overflow: hidden;
+    }
+}
