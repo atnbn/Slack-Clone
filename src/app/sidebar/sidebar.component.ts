@@ -19,7 +19,8 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { SideNavService } from '../services/sidenav.service';
 import { debug } from 'console';
 import { ChatRoomComponent } from '../chat-room/chat-room.component';
-
+import { catchError, filter, throwError } from 'rxjs';
+import { doc, deleteDoc } from 'firebase/firestore';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -28,7 +29,7 @@ import { ChatRoomComponent } from '../chat-room/chat-room.component';
 @Injectable({ providedIn: 'root' })
 export class SidebarComponent implements OnInit {
   allChannels: any = [];
-
+  showError: any;
   DM_channels: any = [];
 
   allUSers: any = {};
@@ -61,7 +62,7 @@ export class SidebarComponent implements OnInit {
     this.loadDirectChannelDB();
     //check screen size
     this.onResize(event);
-    console.log('ALL user', this.allUSers);
+    // console.log('ALL user', this.allUSers);
   }
 
   //Load data form firestore for channels
@@ -84,22 +85,35 @@ export class SidebarComponent implements OnInit {
       });
   }
 
+  deleteDm() {
+    this.firestore
+      .collection('directMessage')
+      .valueChanges({ idField: 'dmID' });
+  }
+
   //To Load Channel and show only to correct User
   loadDirectChannelDB() {
     this.firestore
       .collection('directMessage')
       .valueChanges({ idField: 'dmID' })
-      .subscribe((DM) => {
-        this.DM_channels = [];
-        DM.forEach((channels) => {
-          channels['users'].forEach((user) => {
-            if (user.userId === this.authService.auth.currentUser.uid) {
-              this.DM_channels.push(channels);
-              console.log(this.DM_channels);
-            }
+      .subscribe(
+        (DM) => {
+          this.DM_channels = [];
+          DM.forEach((channels) => {
+            channels['users'].forEach((user) => {
+              if (user.userId === this.authService.auth.currentUser.uid) {
+                if (this.DM_channels !== DM['dmID']) {
+                  this.DM_channels.push(channels);
+                  // console.log(this.DM_channels);
+                }
+              } /* filter((dm) =>{
+                this.DM_channels.dmID === this.DM_channels.dmID
+              }) */
+            });
           });
-        });
-      });
+        },
+        catchError((error) => throwError((this.showError = error)))
+      );
   }
 
   openDialog() {
@@ -142,7 +156,7 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['login']);
     window.location.reload();
     this.authService.loggedIn = false;
-    console.log('clicked');
+    // console.log('clicked');
   }
 
   toggleChannel() {}

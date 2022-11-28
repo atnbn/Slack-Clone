@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.authService);
+    // console.log(this.authService);
   }
 
   logout() {

@@ -50,14 +50,18 @@
             [routerLink]="['/chat/' + dm.dmID]"
           >
             <!-- Img for user  -->
-            <img class="hashtag" src="assets/img/" />
+
+            <img
+              class="hashtag"
+              [src]="dm?.photoURL ?? 'assets/profile-img/profile-1.png'"
+            />
 
             <a class="link-to-channel">
-              <!-- {{ dm.name.split(",", 1) }} -->
+              {{ dm.name.split(",", 1) }}
             </a>
           </div>
 
-          <div class="link-container" (click)="openDialog()">
+          <div class="link-container" (click)="OpenAddDmChannel()">
             <img
               class="hashtag"
               src="assets/img/sidebar/icons8-plus-math-24.png"
