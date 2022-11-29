@@ -28,7 +28,6 @@ import { catchError, filter, throwError } from 'rxjs';
 })
 @Injectable({ providedIn: 'root' })
 export class SidebarComponent implements OnInit {
-  allUserArray: any = [];
   currentUser: any = [];
   testUser = this.authService.auth.currentUser;
 
@@ -38,7 +37,7 @@ export class SidebarComponent implements OnInit {
   allChannels: any = [];
   showError: any;
   DM_channels: any = [];
-  allUSers: any = {};
+  allUsers: any = [];
   allowedUsers: any = [];
   public innerWidth: any;
   allDirectChannles;
@@ -63,12 +62,12 @@ export class SidebarComponent implements OnInit {
       .collection('users')
       .valueChanges({ idField: 'userId' })
       .subscribe((changes: any) => {
-        this.allUserArray = [];
-        this.allUserArray.push(...changes);
+        this.allUsers = [];
+        this.allUsers = changes;
         // this.filterUser();
-        console.log(this.allUserArray);
+        console.log(this.allUsers);
       });
-    this.loadUserFromDB();
+    // this.loadUserFromDB();
     this.checkCurrentUser();
 
     this.sideNavService.sideNavToggleSubject.subscribe(() => {
@@ -80,7 +79,7 @@ export class SidebarComponent implements OnInit {
     this.loadDirectChannelDB();
     //check screen size
     this.onResize(event);
-    // console.log('ALL user', this.allUSers);
+    // console.log('ALL user', this.allUsers);
   }
 
   //Load data form firestore for channels
@@ -89,7 +88,7 @@ export class SidebarComponent implements OnInit {
       .collection('users')
       .valueChanges({ idField: 'userId' })
       .subscribe((changes: any) => {
-        this.allUSers = changes;
+        this.allUsers = changes;
       });
   }
 
@@ -111,7 +110,7 @@ export class SidebarComponent implements OnInit {
   }
 
   filterUser() {
-    return this.allUserArray.filter((user: any) => {
+    return this.allUsers.filter((user: any) => {
       if (user.email || user.eamil) {
         this.accountUsers.push(user);
       }
@@ -119,7 +118,7 @@ export class SidebarComponent implements OnInit {
   }
   checkCurrentUser() {
     debugger;
-    this.allUserArray.filter((user: any) => {
+    this.allUsers.filter((user: any) => {
       if (user.uid === this.authService.auth.currentUser.uid) {
         console.log('user foun', user.uid);
         this.currentUser = [];
