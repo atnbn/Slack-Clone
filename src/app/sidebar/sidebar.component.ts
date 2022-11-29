@@ -66,8 +66,8 @@ export class SidebarComponent implements OnInit {
     });
     console.log(this.currentUser);
 
-    this.loadChannels();
     this.loadDirectChannelDB();
+    this.loadChannels();
     //check screen size
     this.onResize(event);
     // console.log('ALL user', this.allUsers);
@@ -131,13 +131,14 @@ export class SidebarComponent implements OnInit {
           DM.forEach((channels) => {
             channels['users'].forEach((user: { userId: string }) => {
               if (user.userId === this.authService.auth.currentUser.uid) {
-                // if (this.DM_channels !== DM['dmID']) {
-                this.DM_channels.push(channels);
-                console.log(this.DM_channels);
-                // }
-              } /* filter((dm) =>{
+                if (this.DM_channels !== DM['dmID']) {
+                  this.DM_channels.push(channels);
+                  console.log(this.DM_channels);
+                  // }
+                } /* filter((dm) =>{
                 this.DM_channels.dmID === this.DM_channels.dmID
               }) */
+              }
             });
           });
         },

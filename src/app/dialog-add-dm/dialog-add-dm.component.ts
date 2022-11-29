@@ -100,7 +100,7 @@ export class DialogAddDmComponent implements OnInit {
     //   .join(','); // Add all users name to direct message
     console.log(this.directMessage.name);
     this.firestore
-      .collection('users')
+      .collection('directMessage')
       .add(this.directMessage)
       .then((DM: any) => {
         // window.location.reload();
