@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { debug } from 'console';
-import { DirectMassage } from '../interface/directMessage';
+import { DirectMessage } from '../interface/directMessage';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class DialogAddDmComponent implements OnInit {
   accountUsers: any = []; // all Users
   selectedUsers = new FormControl();
   selectedUser = [];
-  directMessage: DirectMassage;
+  directMessage: DirectMessage;
   currentUserArray = [];
   userID: string;
   constructor(

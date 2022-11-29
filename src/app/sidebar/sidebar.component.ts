@@ -128,8 +128,8 @@ export class SidebarComponent implements OnInit {
       .subscribe(
         (DM) => {
           this.DM_channels = [];
-          DM.forEach((channels) => {
-            channels['users'].forEach((user: { userId: string }) => {
+          DM.map((channels) => {
+            channels['directMessage'].map((user: { userId: string }) => {
               if (user.userId === this.authService.auth.currentUser.uid) {
                 if (this.DM_channels !== DM['dmID']) {
                   this.DM_channels.push(channels);
