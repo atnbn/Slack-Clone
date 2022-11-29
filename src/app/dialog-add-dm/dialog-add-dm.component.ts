@@ -14,7 +14,6 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class DialogAddDmComponent implements OnInit {
   users: any = [];
-  // currantUserUID: any;
   accountUsers: any = []; // all Users
   selectedUsers = new FormControl();
   selectedUser = [];
@@ -87,17 +86,17 @@ export class DialogAddDmComponent implements OnInit {
    */
 
   createDMChannel() {
+    this.currentUser(); // Add currant user to direct message
     this.selectedUser = []; // if there is anything in array, empty it
-    this.currentUser();
-    // Push the selected User into the array
+
+    this.selectedUsers.value.map((user: any) => {
+      this.selectedUser.push(user, ...this.currentUserArray);
+    });
+
+    this.directMessage.users = this.selectedUser; // Add all users to direct message
     this.directMessage.name = this.selectedUser
       .map((user: any) => user.name)
       .join(', '); // Add all users name to direct message
-    this.directMessage.users = this.selectedUser; // Add all users to direct message
-    console.log(this.directMessage.users);
-    // this.directMessage.name = this.selectedUser
-    //   .map((user: any) => user)
-    //   .join(','); // Add all users name to direct message
     console.log(this.directMessage.name);
     this.firestore
       .collection('directMessage')
@@ -108,7 +107,6 @@ export class DialogAddDmComponent implements OnInit {
         this.router.navigateByUrl('/chat/' + DM.id);
       });
   }
-
   // createDM() {
   //   this.currentUser();
   //   console.log(this.currentUser);

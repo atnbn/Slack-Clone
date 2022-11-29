@@ -28,16 +28,14 @@ import { catchError, filter, throwError } from 'rxjs';
 })
 @Injectable({ providedIn: 'root' })
 export class SidebarComponent implements OnInit {
-  currentUser: any = [];
   testUser = this.authService.auth.currentUser;
-
+  allUsers: any = [];
+  currentUser: any = [];
   currentUserID: string;
   accountUsers: any = []; // all Users
-
   allChannels: any = [];
   showError: any;
   DM_channels: any = [];
-  allUsers: any = [];
   allowedUsers: any = [];
   public innerWidth: any;
   allDirectChannles;
@@ -60,13 +58,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.loadUserFromDB();
     this.checkCurrentUser();
-
-    this.sideNavService.sideNavToggleSubject.subscribe(() => {
-      this.sidenav?.toggle();
-    });
-    console.log(this.currentUser);
-
-    this.loadDirectChannelDB();
+    this.toggleChannel();
+    this.loadDirectMessage();
     this.loadChannels();
     //check screen size
     this.onResize(event);
@@ -108,7 +101,6 @@ export class SidebarComponent implements OnInit {
     });
   }
   checkCurrentUser() {
-    debugger;
     this.allUsers.filter((user: any) => {
       if (user.uid === this.authService.auth.currentUser.uid) {
         console.log('user foun', user.uid);
@@ -121,21 +113,21 @@ export class SidebarComponent implements OnInit {
   }
 
   //To Load Channel and show only to correct User
-  loadDirectChannelDB() {
+  loadDirectMessage() {
     this.firestore
       .collection('directMessage')
       .valueChanges({ idField: 'dmID' })
       .subscribe(
-        (DM) => {
-          this.DM_channels = [];
-          DM.map((channels) => {
-            channels['directMessage'].map((user: { userId: string }) => {
-              if (user.userId === this.authService.auth.currentUser.uid) {
-                if (this.DM_channels !== DM['dmID']) {
+        (dms) => {
+          dms.filter((channels) => {
+            this.DM_channels = [];
+            channels['users'].map((user: { uid: string }) => {
+              if (user.uid === this.authService.auth.currentUser.uid) {
+                if (this.DM_channels.users.uid === dms['dmID']) {
                   this.DM_channels.push(channels);
-                  console.log(this.DM_channels);
-                  // }
-                } /* filter((dm) =>{
+                  console.log('Dm channels', this.DM_channels);
+                }
+                /* filter((dm) =>{
                 this.DM_channels.dmID === this.DM_channels.dmID
               }) */
               }
@@ -189,5 +181,9 @@ export class SidebarComponent implements OnInit {
     // console.log('clicked');
   }
 
-  toggleChannel() {}
+  toggleChannel() {
+    this.sideNavService.sideNavToggleSubject.subscribe(() => {
+      this.sidenav?.toggle();
+    });
+  }
 }

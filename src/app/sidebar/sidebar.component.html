@@ -44,21 +44,18 @@
         <!-- Dm Container -->
         <div class="dm-container">
           <h3>Direct Messages</h3>
+
           <div
             class="link-container"
             *ngFor="let dm of DM_channels"
             [routerLink]="['/chat/' + dm.dmID]"
           >
             <!-- Img for user  -->
-
             <img
               class="hashtag"
               [src]="dm?.photoURL ?? 'assets/profile-img/profile-1.png'"
             />
-
-            <a class="link-to-channel">
-              {{ dm.name.split(",", 1) }}
-            </a>
+            <a class="link-to-channel"> {{ dm.name.split(", ", 1) }}</a>
           </div>
 
           <div class="link-container" (click)="OpenAddDmChannel()">
