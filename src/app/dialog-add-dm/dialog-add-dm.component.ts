@@ -89,32 +89,24 @@ export class DialogAddDmComponent implements OnInit {
   createDMChannel() {
     this.selectedUser = []; // if there is anything in array, empty it
     this.currentUser();
-    console.log('selected User', this.selectedUser);
     // Push the selected User into the array
-    this.selectedUsers.value.map((user: any) => {
-      this.selectedUser.push(user);
-    });
-    console.log('user id', this.userID);
-
+    this.directMessage.name = this.selectedUser
+      .map((user: any) => user.name)
+      .join(', '); // Add all users name to direct message
+    this.directMessage.users = this.selectedUser; // Add all users to direct message
+    console.log(this.directMessage.users);
+    // this.directMessage.name = this.selectedUser
+    //   .map((user: any) => user)
+    //   .join(','); // Add all users name to direct message
+    console.log(this.directMessage.name);
     this.firestore
       .collection('users')
-      .doc(this.userID)
-      .collection('dms')
-      .doc('dmchannel');
-    // .add(this.selectedUser)
-    // this.directMessage.users = this.selectedUser; // Add all users to direct message
-    // this.directMessage.name = this.selectedUser
-    //   .map((user: any) => user.name)
-    //   .join(',  '); // Add all users name to direct message
-    // console.log(this.directMessage.name);
-    // this.firestore
-    //   .collection('users')
-    //   .add(this.directMessage)
-    //   .then((DM: any) => {
-    //     // window.location.reload();
-    //     this.dialogRef.close();
-    //     this.router.navigateByUrl('/chat/' + DM.id);
-    //   });
+      .add(this.directMessage)
+      .then((DM: any) => {
+        // window.location.reload();
+        this.dialogRef.close();
+        this.router.navigateByUrl('/chat/' + DM.id);
+      });
   }
 
   // createDM() {

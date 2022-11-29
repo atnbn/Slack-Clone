@@ -7,20 +7,20 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Inject } from '@angular/core';
+// import { Inject } from '@angular/core';
 import { DialogAddChannelsComponent } from '../dialog-add-channels/dialog-add-channels.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { Channel } from '../interface/channel';
+// import { Channel } from '../interface/channel';
 import { AuthenticationService } from '../services/authentication.service';
-import { AsyncPipe } from '@angular/common';
+// import { AsyncPipe } from '@angular/common';
 import { DialogAddDmComponent } from '../dialog-add-dm/dialog-add-dm.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { SideNavService } from '../services/sidenav.service';
-import { debug } from 'console';
+// import { debug } from 'console';
 import { ChatRoomComponent } from '../chat-room/chat-room.component';
 import { catchError, filter, throwError } from 'rxjs';
-import { doc, deleteDoc } from 'firebase/firestore';
+// import { doc, deleteDoc } from 'firebase/firestore';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -28,10 +28,16 @@ import { doc, deleteDoc } from 'firebase/firestore';
 })
 @Injectable({ providedIn: 'root' })
 export class SidebarComponent implements OnInit {
+  allUserArray: any = [];
+  currentUser: any = [];
+  testUser = this.authService.auth.currentUser;
+
+  currentUserID: string;
+  accountUsers: any = []; // all Users
+
   allChannels: any = [];
   showError: any;
   DM_channels: any = [];
-
   allUSers: any = {};
   allowedUsers: any = [];
   public innerWidth: any;
@@ -53,12 +59,24 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'userId' })
+      .subscribe((changes: any) => {
+        this.allUserArray = [];
+        this.allUserArray.push(...changes);
+        // this.filterUser();
+        console.log(this.allUserArray);
+      });
+    this.loadUserFromDB();
+    this.checkCurrentUser();
+
     this.sideNavService.sideNavToggleSubject.subscribe(() => {
       this.sidenav?.toggle();
     });
+    console.log(this.currentUser);
 
     this.loadChannels();
-    this.loadUserFromDB();
     this.loadDirectChannelDB();
     //check screen size
     this.onResize(event);
@@ -66,6 +84,15 @@ export class SidebarComponent implements OnInit {
   }
 
   //Load data form firestore for channels
+  loadUserFromDB() {
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'userId' })
+      .subscribe((changes: any) => {
+        this.allUSers = changes;
+      });
+  }
+
   loadChannels() {
     this.firestore
       .collection('channels')
@@ -76,19 +103,31 @@ export class SidebarComponent implements OnInit {
   }
 
   //Load User data form firestore
-  loadUserFromDB() {
-    this.firestore
-      .collection('users')
-      .valueChanges({ idField: 'userId' })
-      .subscribe((changes: any) => {
-        this.allUSers = changes;
-      });
-  }
 
   deleteDm() {
     this.firestore
       .collection('directMessage')
       .valueChanges({ idField: 'dmID' });
+  }
+
+  filterUser() {
+    return this.allUserArray.filter((user: any) => {
+      if (user.email || user.eamil) {
+        this.accountUsers.push(user);
+      }
+    });
+  }
+  checkCurrentUser() {
+    debugger;
+    this.allUserArray.filter((user: any) => {
+      if (user.uid === this.authService.auth.currentUser.uid) {
+        console.log('user foun', user.uid);
+        this.currentUser = [];
+        this.currentUser.push(user);
+        this.currentUserID = this.currentUser[0].uid;
+        console.log('current User ', this.currentUser);
+      }
+    });
   }
 
   //To Load Channel and show only to correct User
@@ -100,12 +139,12 @@ export class SidebarComponent implements OnInit {
         (DM) => {
           this.DM_channels = [];
           DM.forEach((channels) => {
-            channels['users'].forEach((user) => {
+            channels['users'].forEach((user: { userId: string }) => {
               if (user.userId === this.authService.auth.currentUser.uid) {
-                if (this.DM_channels !== DM['dmID']) {
-                  this.DM_channels.push(channels);
-                  // console.log(this.DM_channels);
-                }
+                // if (this.DM_channels !== DM['dmID']) {
+                this.DM_channels.push(channels);
+                console.log(this.DM_channels);
+                // }
               } /* filter((dm) =>{
                 this.DM_channels.dmID === this.DM_channels.dmID
               }) */
