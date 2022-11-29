@@ -58,16 +58,7 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.firestore
-      .collection('users')
-      .valueChanges({ idField: 'userId' })
-      .subscribe((changes: any) => {
-        this.allUsers = [];
-        this.allUsers = changes;
-        // this.filterUser();
-        console.log(this.allUsers);
-      });
-    // this.loadUserFromDB();
+    this.loadUserFromDB();
     this.checkCurrentUser();
 
     this.sideNavService.sideNavToggleSubject.subscribe(() => {
