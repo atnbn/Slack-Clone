@@ -57,7 +57,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserFromDB();
-    this.checkCurrentUser();
+    // this.checkCurrentUser()
     this.toggleChannel();
     this.loadDirectMessage();
     this.loadChannels();
@@ -93,24 +93,13 @@ export class SidebarComponent implements OnInit {
       .valueChanges({ idField: 'dmID' });
   }
 
-  filterUser() {
-    return this.allUsers.filter((user: any) => {
-      if (user.email || user.eamil) {
-        this.accountUsers.push(user);
-      }
-    });
-  }
-  checkCurrentUser() {
-    this.allUsers.filter((user: any) => {
-      if (user.uid === this.authService.auth.currentUser.uid) {
-        console.log('user foun', user.uid);
-        this.currentUser = [];
-        this.currentUser.push(user);
-        this.currentUserID = this.currentUser[0].uid;
-        console.log('current User ', this.currentUser);
-      }
-    });
-  }
+  // filterUser() {
+  //   return this.allUsers.filter((user: any) => {
+  //     if (user.email || user.eamil) {
+  //       this.accountUsers.push(user);
+  //     }
+  //   });
+  // }
 
   //To Load Channel and show only to correct User
   loadDirectMessage() {
@@ -120,16 +109,19 @@ export class SidebarComponent implements OnInit {
       .subscribe(
         (dms) => {
           dms.filter((channels) => {
-            this.DM_channels = [];
+            // this.DM_channels = [];
             channels['users'].map((user: { uid: string }) => {
               if (user.uid === this.authService.auth.currentUser.uid) {
-                if (this.DM_channels.users.uid === dms['dmID']) {
+                if (channels.dmID === this.DM_channels) {
                   this.DM_channels.push(channels);
                   console.log('Dm channels', this.DM_channels);
-                }
-                /* filter((dm) =>{
+                  // }
+                  /* filter((dm) =>{
                 this.DM_channels.dmID === this.DM_channels.dmID
               }) */
+                } else {
+                  console.log('doppelt channel');
+                }
               }
             });
           });
