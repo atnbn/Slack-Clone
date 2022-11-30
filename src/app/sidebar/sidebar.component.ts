@@ -109,19 +109,18 @@ export class SidebarComponent implements OnInit {
       .subscribe(
         (dms) => {
           dms.filter((channels) => {
-            // this.DM_channels = [];
+            this.DM_channels = [];
             channels['users'].map((user: { uid: string }) => {
               if (user.uid === this.authService.auth.currentUser.uid) {
-                if (channels.dmID === this.DM_channels) {
-                  this.DM_channels.push(channels);
-                  console.log('Dm channels', this.DM_channels);
-                  // }
-                  /* filter((dm) =>{
+                // if (channels.dmID === this.DM_channels) {
+                this.DM_channels.push(channels);
+                console.log('Dm channels', this.DM_channels);
+                // }
+                /* filter((dm) =>{
                 this.DM_channels.dmID === this.DM_channels.dmID
               }) */
-                } else {
-                  console.log('doppelt channel');
-                }
+              } else {
+                console.log('duplicate');
               }
             });
           });
